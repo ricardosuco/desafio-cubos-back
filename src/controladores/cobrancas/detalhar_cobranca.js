@@ -1,7 +1,7 @@
 const {knex} = require("../../conexao")
 
 const detalharCobranca = async (req,res) => {
-    const { id } = req.body
+    const { id } = req.params
 
     try {
         const cobrancaDetalhada = await knex('cobrancas').where('cliente_id', id).debug()
