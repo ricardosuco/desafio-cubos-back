@@ -40,6 +40,10 @@ const atualizarUsuario = async (req, res) => {
             return res.status(400).json({ mensagem: "Email ja cadastrado" })
         }
 
+        if (telefone.length !== 12) {
+            return res.status(400).json({ mensagem: "O telefone deve conter 12 dígitos (DDD) + Número" })
+        }
+
         const senhaCriptografada = await bcrypt.hash(senha, 10);
         const usuarioAtualizado = await knex('usuarios').update({ nome, email, senha: senhaCriptografada, cpf, telefone }).where({ id }).debug()
 
